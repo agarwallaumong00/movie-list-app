@@ -1,0 +1,115 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.7/angular-material.min.css" type="text/css" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="app.css"/>
+    </head>
+
+    <body ng-app="coviam">
+        <div ng-controller="coviamController">
+            <div class="main-div">
+                <div class="navigation-div" layout="row" layout-align="center center">
+                    <div>
+                        <md-button class="md-raised md-primary" ng-click="previousPage()" ng-disabled="!people.previous">Pre</md-button>
+                    </div>
+                    <div>
+                        <span>Page</span>
+                        <input class="page-number" type="number" ng-model="pageNumber" ng-keypress="gotoPage($event, pageNumber)">
+                        <span>of 9</span>
+                    </div>
+                    <div>
+                        <md-button class="md-raised md-primary" ng-click="nextPage()" ng-disabled="!people.next">Next</md-button>
+                    </div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <td>
+                                <div layout="column" layout-align="space-around" class="center-alignment">
+                                    <div>Name</div>
+                                    <md-input-container md-no-float class="md-block">
+                                        <input type="text" ng-model="filterByName" placeholder="Filter by Name">
+                                    </md-input-container>
+                                </div>
+                            </td>
+                            <td>
+                                <div layout="column" layout-align="space-around" class="center-alignment">
+                                    <div>Gender</div>
+                                    <md-input-container md-no-float class="md-block">
+                                        <input type="text" ng-model="filterByGender" placeholder="Filter by Gender">
+                                    </md-input-container>
+                                </div>
+                            </td>
+                            <td>
+                                <div layout="column" layout-align="space-around" class="center-alignment">
+                                    <div>Birth Year</div>
+                                    <md-input-container md-no-float class="md-block">
+                                        <input type="text" ng-model="filterByBirthyear" placeholder="Filter by Birth Year">
+                                    </md-input-container>
+                                </div>
+                            </td>
+                            <td>
+                                <div layout="column" layout-align="space-around" class="center-alignment">
+                                    <div>Film Title</div>
+                                    <md-input-container md-no-float class="md-block">
+                                        <input type="text" ng-model="filterByFilmTitle" placeholder="Filter by Film Title">
+                                    </md-input-container>
+                                </div>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="data in people.results |
+                                    filter: {name: filterByName} | 
+                                    filter: {gender: filterByGender} | 
+                                    filter: {birth_year: filterByBirthyear}">
+                            <td>
+                                {{data.name}}
+                            </td>
+                            <td>
+                                {{data.gender}}
+                            </td>
+                            <td>
+                                {{data.birth_year}}
+                            </td>
+                            <td class="film-title-cell">
+                                <div class="film-title-div" ng-repeat="details in data.filmTitles | filter: {title: filterByFilmTitle}">
+                                    <span ng-model="filmTiles" ng-click="getFilmDetails($event, details)">{{details.title}}</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="navigation-div bottom" layout="row" layout-align="center center">
+                    <div>
+                        <md-button class="md-raised md-primary" ng-click="previousPage()" ng-disabled="!people.previous">Pre</md-button>
+                    </div>
+                    <div>
+                        <span>Page</span>
+                        <input class="page-number" type="number" ng-model="pageNumber" ng-keypress="gotoPage($event, pageNumber)">
+                        <span>of 9</span>
+                    </div>
+                    <div>
+                        <md-button class="md-raised md-primary" ng-click="nextPage()" ng-disabled="!people.next">Next</md-button>
+                    </div>
+                </div>
+            </div>
+            <div class="loader">
+                <md-progress-circular md-diameter='40' ng-show="showLoader"></md-progress-circular>
+            </div>
+            <div class="backdrop" ng-show="showLoader"></div>
+
+        </div>
+
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-animate.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-aria.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.7/angular-material.min.js"></script>
+        <script src="app.js"></script>
+        <script src="app.controller.js"></script>
+        <script src="app.service.js"></script>
+    </body>
+</html>

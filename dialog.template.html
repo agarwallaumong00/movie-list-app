@@ -1,0 +1,48 @@
+<md-dialog>
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>{{data.title}}</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <i class="material-icons">close</i>
+                </md-button>
+            </div>
+        </md-toolbar>
+    
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <div class="margin-bottom">
+                    <div class="bold">
+                        <span>Description:</span>
+                    </div>
+                    <p>{{data.opening_crawl}}</p>
+                </div>
+                <div class="margin-bottom">
+                    <span class="bold">Release Date: </span>
+                    <span>{{data.release_date}}</span>                    
+                </div>
+                <div class="margin-bottom">
+                    <span class="bold">Director: </span>
+                    <span>{{data.director}}</span>                    
+                </div>
+                <div class="margin-bottom">
+                    <span class="bold">Producer: </span>
+                    <span>{{data.producer}}</span>                    
+                </div>
+                <div layout="row">
+                    <span class="bold">Characters: </span>
+                    <div class="characters">
+                        <span ng-bind="getNames()"></span>
+                    </div>
+                </div>
+            </div>
+        </md-dialog-content>
+    
+        <!-- <md-dialog-actions layout="row">
+            <md-button ng-click="answer('useful')">
+                Useful
+            </md-button>
+        </md-dialog-actions> -->
+    </form>
+</md-dialog>
